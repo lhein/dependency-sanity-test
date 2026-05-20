@@ -1,0 +1,20 @@
+name: Dependency Sanity
+on:
+  pull_request:
+    paths: ['**/pom.xml']
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: lhein/dependency-sanity-action@v0.1.0
+        with:
+          mode: diff
+          fail-on: none
